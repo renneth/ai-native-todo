@@ -1,0 +1,26 @@
+---
+description: Next.js App Router conventions for this sandbox
+globs: app/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Next.js App Router
+
+- Default to Server Components. Add `'use client'` only when the file uses state, effects, or browser APIs.
+- Do not import Pages Router APIs (`next/router`, `next/head`, `getServerSideProps`).
+- Interactive todo UI lives in `app/components/todo-app.tsx`. Domain logic stays in `lib/todos.ts`.
+- Keep persistence in `lib/storage.ts` (localStorage). Do not introduce a database here.
+
+```tsx
+// BAD — client boundary on a page that only composes UI
+"use client";
+export default function Page() {
+  return <TodoApp />;
+}
+
+// GOOD — server page, client island
+import { TodoApp } from "./components/todo-app";
+export default function Page() {
+  return <TodoApp />;
+}
+```
