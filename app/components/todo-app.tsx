@@ -106,8 +106,7 @@ export function TodoApp() {
           Todo
         </h1>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-          Add, complete, and edit tasks. They stay in this browser via
-          localStorage.
+          Add, complete, and edit tasks. They stay in this browser only.
         </p>
       </header>
 
@@ -142,8 +141,10 @@ export function TodoApp() {
           ) : visible.length === 0 ? (
             <li className="px-4 py-10 text-center text-sm text-zinc-500">
               {todos.length === 0
-                ? "Nothing here yet. Add a first task above."
-                : "No tasks in this filter."}
+                ? "Your list is empty. Add a first task above."
+                : filter === "active"
+                  ? "Nothing left to do."
+                  : "No completed tasks yet."}
             </li>
           ) : (
             visible.map((item) => (
